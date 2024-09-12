@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -10,6 +11,7 @@ plugins {
 }
 
 kotlin {
+    jvm("desktop")
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -55,7 +57,12 @@ kotlin {
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
         }
+//        val desktopMain by getting
+        macosMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
     }
+
 }
 
 android {
@@ -84,8 +91,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -97,4 +104,16 @@ android {
 dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+}
+
+compose.desktop {
+    application {
+        mainClass = "org.example.project.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "org.example.project"
+            packageVersion = "1.0.0"
+        }
+    }
 }
