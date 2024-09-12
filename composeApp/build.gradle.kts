@@ -12,6 +12,7 @@ plugins {
 
 kotlin {
     jvm("desktop")
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -57,8 +58,9 @@ kotlin {
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
         }
-//        val desktopMain by getting
-        macosMain.dependencies {
+
+        val desktopMain by getting
+        desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
     }
@@ -108,7 +110,7 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "org.example.project.MainKt"
+        mainClass = "org.example.project.Main"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
