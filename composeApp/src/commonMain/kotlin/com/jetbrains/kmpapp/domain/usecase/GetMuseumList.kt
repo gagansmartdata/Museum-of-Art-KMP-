@@ -9,7 +9,9 @@ class GetMuseumList(private val museumRepository: MuseumRepository) {
 
     operator fun invoke(): Flow<List<MuseumObject>> {
         return flow {
-            emit(museumRepository.getData().map { it.toMuseumObject() })
+            emit(museumRepository.getData().map {
+                println("GetMuseumList.invoke ${it.toString()}")
+                it.toMuseumObject() })
         }
     }
 }

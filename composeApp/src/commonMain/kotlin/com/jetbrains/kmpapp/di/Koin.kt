@@ -10,6 +10,7 @@ import com.jetbrains.kmpapp.screens.detail.DetailScreenModel
 import com.jetbrains.kmpapp.screens.list.ListScreenModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -24,6 +25,8 @@ val dataModule = module {
             install(ContentNegotiation) {
                 // TODO Fix API so it serves application/json
                 json(json, contentType = ContentType.Any)
+            }
+            install(Logging) {
             }
         }
     }

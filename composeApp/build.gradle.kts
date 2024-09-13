@@ -16,7 +16,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_22)
         }
     }
 
@@ -51,17 +51,34 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-
+            implementation(libs.ktor.client.logging)
             implementation(libs.kamel)
             implementation(libs.koin.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
+
         }
 
         val desktopMain by getting
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.ktor.client.core.jvm.v231)
+            implementation(libs.ktor.client.cio.jvm)
+            implementation(libs.voyager.navigator.desktop)
+            implementation(libs.voyager.koin.desktop)
+
+            implementation(libs.kamel.core.desktop)
+            implementation(libs.kamel.image.desktop)
+            implementation(libs.kotlinx.coroutines.core)
+        }
+    }
+
+    macosX64("native") { // on macOS
+        // linuxX64("native") // on Linux
+        // mingwX64("native") // on Windows
+        binaries {
+            executable()
         }
     }
 
@@ -93,8 +110,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_22
+        targetCompatibility = JavaVersion.VERSION_22
     }
     buildFeatures {
         compose = true
@@ -110,7 +127,7 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "org.example.project.Main"
+        mainClass = "org.example.project.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

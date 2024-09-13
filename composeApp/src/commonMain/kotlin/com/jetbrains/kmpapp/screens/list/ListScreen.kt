@@ -63,23 +63,24 @@ object ListScreen : Tab {
         val navigator = LocalNavigator.currentOrThrow
         val screenModel: ListScreenModel = getScreenModel()
 
-        val objects by screenModel.objects.collectAsState()
+        val objects by screenModel.objects.collectAsState(initial = null)
 
         var showLoader by remember { mutableStateOf(true) }
 
-
-        AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
-            if (objectsAvailable) {
-                showLoader = false
-                ObjectGrid(
-                    objects = objects,
-                    onObjectClick = { objectId ->
-                        navigator.parent?.push(DetailScreen(objectId))
+        objects?.let {objects->
+            AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
+                if (objectsAvailable) {
+                    showLoader = false
+                    ObjectGrid(
+                        objects = objects,
+                        onObjectClick = { objectId ->
+                            navigator.parent?.push(DetailScreen(objectId))
+                        }
+                    )
+                } else {
+                    if (showLoader) {
+                        EmptyScreenContent(Modifier.fillMaxSize())
                     }
-                )
-            } else {
-                if (showLoader) {
-                    EmptyScreenContent(Modifier.fillMaxSize())
                 }
             }
         }
