@@ -19,32 +19,38 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+    jvmToolchain(17)
 
     listOf(
-        iosX64(),
+//        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            freeCompilerArgs += listOf("-Xbinary=bundleId=com.jetbrains.kmpapp","-Xobjc-generics")
         }
     }
+    applyDefaultHierarchyTemplate()
 
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(compose.foundation)
+            implementation(compose.ui)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(compose.foundation)
+            implementation(compose.ui)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
-            implementation(compose.foundation)
             implementation(compose.material)
-            implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
@@ -62,6 +68,8 @@ kotlin {
 
         val desktopMain by getting
         desktopMain.dependencies {
+            implementation(compose.foundation)
+            implementation(compose.ui)
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.core.jvm.v231)
             implementation(libs.ktor.client.cio.jvm)
@@ -72,15 +80,17 @@ kotlin {
             implementation(libs.kamel.image.desktop)
             implementation(libs.kotlinx.coroutines.core)
         }
+
+
     }
 
-    macosX64("native") { // on macOS
+/*    macosX64("native") { // on macOS
         // linuxX64("native") // on Linux
         // mingwX64("native") // on Windows
         binaries {
             executable()
         }
-    }
+    }*/
 
 }
 
