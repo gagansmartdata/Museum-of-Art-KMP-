@@ -3,6 +3,7 @@ package com.jetbrains.kmpapp.screens.list
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -30,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -67,7 +71,7 @@ object ListScreen : Tab {
 
         var showLoader by remember { mutableStateOf(true) }
 
-        objects?.let {objects->
+        objects?.let { objects ->
             AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
                 if (objectsAvailable) {
                     showLoader = false
@@ -93,17 +97,19 @@ private fun ObjectGrid(
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LazyRow() {  }
+    LazyRow() { }
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp)
     ) {
         items(objects, key = { it.objectID }) { obj ->
-            ObjectFrame(
-                obj = obj,
-                onClick = { onObjectClick(obj.objectID) },
-            )
+            Box(modifier = Modifier.padding(8.dp)){
+                ObjectFrame(
+                    obj = obj,
+                    onClick = { onObjectClick(obj.objectID) },
+                )
+            }
         }
     }
 }
@@ -114,25 +120,41 @@ private fun ObjectFrame(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier
-            .padding(8.dp)
-            .clickable { onClick() }
-    ) {
-        KamelImage(
-            resource = asyncPainterResource(data = obj.primaryImageSmall),
-            contentDescription = obj.title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .background(Color.LightGray),
-        )
+    Card(Modifier, shape = RoundedCornerShape(10.dp), elevation = 4.dp, backgroundColor = Color.White) {
+        Column(
+            Modifier
+                .clickable { onClick() }
+        ) {
+            KamelImage(
+                resource = asyncPainterResource(data = obj.primaryImageSmall),
+                contentDescription = obj.title,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .background(Color.LightGray),
+            )
 
-        Spacer(Modifier.height(2.dp))
-
-        Text(obj.title, style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold))
-        Text(obj.artistDisplayName, style = MaterialTheme.typography.body2)
-        Text(obj.objectDate, style = MaterialTheme.typography.caption)
+            Spacer(Modifier.height(2.dp))
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(
+                    obj.title,
+                    style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    obj.artistDisplayName, style = MaterialTheme.typography.body2,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    obj.objectDate, style = MaterialTheme.typography.caption,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
     }
+
 }

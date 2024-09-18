@@ -1,0 +1,412 @@
+package com.jetbrains.kmpapp.screens.seemeHome
+
+data class HomeRes(
+    val count: Int,
+    val `data`: List<HomeData>,
+    val is_completed_account: Int,
+    val is_last_page: Boolean,
+    val message: Int,
+    val status: Int,
+    val success: Boolean
+)
+
+data class HomeData(
+    val about_information: AboutInformation,
+    val country_code: Int,
+    val custom_interest: CustomInterest,
+    val distance: Double,
+    val email: String,
+    val face_verified_image: String,
+    val female_dating: Int,
+    val female_hookup: Int,
+    val female_serious_relation: Int,
+    val gallery_images: GalleryImages=GalleryImages(emptyList()),
+    val gender: Int,
+    val id: Int,
+    val interested_in: String,
+    val is_completed_account: Int,
+    val is_tapped: Int,
+    val latitude: String,
+    val longitude: String,
+    val male_dating: Int,
+    val male_hookup: Int,
+    val male_serious_relation: Int,
+    val miles_away: Int,
+    val mutual_dating: Int,
+    val mutual_hookup: Int,
+    val mutual_serious_relation: Int,
+    val nearby_match: List<Any>,
+    val non_conforming_dating: Int,
+    val non_conforming_hookup: Int,
+    val non_conforming_serious_relation: Int,
+    val personal_informations: PersonalInformations,
+    val personalitytraits: Personalitytraits,
+    val personalitytraits_interests: PersonalitytraitsInterests,
+    val phone_number: String,
+    val recently_active_at: Int,
+    val relation_informations: RelationInformations,
+    val relationship_interests: RelationshipInterests,
+    val serious_relation_percent: Int,
+    val social_accounts: SocialAccounts,
+    val was_nearby: Int
+)
+
+data class AboutInformation(
+    val `data`: DataX,
+    val is_completed: Int
+)
+
+data class CustomInterest(
+    val `data`: List<String>,
+    val is_completed: Int
+)
+
+data class GalleryImages(
+    val `data`: List<DataXX>
+)
+
+data class PersonalInformations(
+    val `data`: DataXXX
+)
+
+data class Personalitytraits(
+    val `data`: DataXXXX,
+    val is_completed: Int
+)
+
+data class PersonalitytraitsInterests(
+    val `data`: DataXXXXX,
+    val is_completed: Int
+)
+
+data class RelationInformations(
+    val `data`: DataXXXXXX,
+    val is_completed: Int,
+    val match_bubble: MatchBubble
+)
+
+data class RelationshipInterests(
+    val `data`: DataXXXXXXX
+)
+
+data class SocialAccounts(
+    val `data`: DataXXXXXXXX,
+    val is_completed: Int
+)
+
+data class DataX(
+    val created_at: String,
+    val id: Int,
+    val occupation_hidden: Int,
+    val occupation_info: String,
+    val summary: String,
+    val summary_hidden: Int,
+    val updated_at: String,
+    val user_id: Int
+)
+
+data class DataXX(
+    val aws_job_id: String,
+    val created_at: String,
+    val file_name: String,
+    val file_priority: Int,
+    val file_type: Int,
+    val has_face: Int,
+    val has_similar_to_profile: Int,
+    val id: Int,
+    val is_profile: Int,
+    val thumbnail_image: String,
+    val thumbnail_image_100: String,
+    val thumbnail_image_200: String,
+    val thumbnail_image_50: String,
+    val updated_at: String,
+    val user_id: Int,
+    val video_moderation_status: String
+)
+
+data class DataXXX(
+    val age: Int,
+    val age_hidden: Int,
+    val birthday: String,
+    val birthday_hidden: Int,
+    val body_type_hidden: Int,
+    val city: String,
+    val city_hidden: Int,
+    val created_at: String,
+    val display_name: String,
+    val display_name_hidden: Int,
+    val female_a_little_extra: Int,
+    val female_athletic: Int,
+    val female_average: Int,
+    val female_curvy: Int,
+    val female_more_to_love: Int,
+    val female_slender: Int,
+    val gender: Int,
+    val gender_hidden: Int,
+    val id: Int,
+    val male_athletic: Int,
+    val male_average: Int,
+    val male_bid_daddy: Int,
+    val male_dad_boy: Int,
+    val male_muscular: Int,
+    val male_slender: Int,
+    val updated_at: String,
+    val user_id: Int
+)
+
+data class DataXXXX(
+    val active: Int,
+    val adventurous: Int,
+    val ambitious: Int,
+    val cerebral: Int,
+    val complex: Int,
+    val confident: Int,
+    val considerate: Int,
+    val creative: Int,
+    val decisive: Int,
+    val dependable: Int,
+    val fair: Int,
+    val friendly: Int,
+    val funny: Int,
+    val generous: Int,
+    val hardworking: Int,
+    val honest: Int,
+    val independent: Int,
+    val intelligent: Int,
+    val interesting: Int,
+    val lazy: Int,
+    val logical: Int,
+    val mysterious: Int,
+    val opinionated: Int,
+    val optimistic: Int,
+    val organized: Int,
+    val ostentatious: Int,
+    val outgoing: Int,
+    val passionate: Int,
+    val passive: Int,
+    val pessimistic: Int,
+    val playful: Int,
+    val quiet: Int,
+    val resourceful: Int,
+    val responsible: Int,
+    val simple: Int,
+    val social: Int,
+    val spontaneous: Int,
+    val user_id: Int,
+    val weird: Int,
+    val wild: Int
+)
+
+data class DataXXXXX(
+    val active: Int,
+    val adventurous: Int,
+    val ambitious: Int,
+    val animals: Int,
+    val art: Int,
+    val backpacking: Int,
+    val bars: Int,
+    val beach: Int,
+    val beer: Int,
+    val bicycling: Int,
+    val cars: Int,
+    val cerebral: Int,
+    val cigars: Int,
+    val city_life: Int,
+    val cocktails: Int,
+    val coffee: Int,
+    val complex: Int,
+    val confident: Int,
+    val considerate: Int,
+    val cooking: Int,
+    val craftwork: Int,
+    val creative: Int,
+    val cuddling: Int,
+    val dancing: Int,
+    val decisive: Int,
+    val dependable: Int,
+    val design: Int,
+    val engineering: Int,
+    val fair: Int,
+    val fashion: Int,
+    val fishing: Int,
+    val fitness: Int,
+    val food: Int,
+    val friendly: Int,
+    val funny: Int,
+    val gambling: Int,
+    val gardening: Int,
+    val generous: Int,
+    val guns: Int,
+    val gym: Int,
+    val hardworking: Int,
+    val history: Int,
+    val honest: Int,
+    val hunting: Int,
+    val independent: Int,
+    val intelligent: Int,
+    val interesting: Int,
+    val investing: Int,
+    val languages: Int,
+    val lazy: Int,
+    val logical: Int,
+    val martial_arts: Int,
+    val meditation: Int,
+    val motorcycles: Int,
+    val movies: Int,
+    val music: Int,
+    val musical_instruments: Int,
+    val mysterious: Int,
+    val nature: Int,
+    val no: Int,
+    val opinionated: Int,
+    val optimistic: Int,
+    val organized: Int,
+    val ostentatious: Int,
+    val outgoing: Int,
+    val painting: Int,
+    val partying: Int,
+    val passionate: Int,
+    val passive: Int,
+    val personality_interests_hidden: Int,
+    val pessimistic: Int,
+    val photography: Int,
+    val playful: Int,
+    val quiet: Int,
+    val reading: Int,
+    val relaxed: Int,
+    val relaxing: Int,
+    val resourceful: Int,
+    val responsible: Int,
+    val restaurants: Int,
+    val running: Int,
+    val science: Int,
+    val scuba_diving: Int,
+    val simple: Int,
+    val singing: Int,
+    val sleeping: Int,
+    val social: Int,
+    val socializing: Int,
+    val socially: Int,
+    val spontaneous: Int,
+    val technology: Int,
+    val traveling: Int,
+    val video_games: Int,
+    val watching_sports: Int,
+    val weird: Int,
+    val whiskey: Int,
+    val wild: Int,
+    val wine: Int,
+    val writing: Int,
+    val yoga: Int
+)
+
+data class DataXXXXXX(
+    val alcohol: Int,
+    val alcohol_range: Int,
+    val alcoholinfo_hidden: Int,
+    val birds_hidden: Int,
+    val childinfo_hidden: Int,
+    val children: Int,
+    val college_experience: Int,
+    val created_at: String,
+    val education: Int,
+    val educationinfo_hidden: Int,
+    val exercise: Int,
+    val exercise_range: Int,
+    val exerciseinfo_hidden: Int,
+    val fish_hidden: Int,
+    val foodinfo_hidden: Int,
+    val height: String,
+    val height_hidden: Int,
+    val how_religious: Int,
+    val id: Int,
+    val income: Int,
+    val income_hidden: Int,
+    val is_birds: Int,
+    val is_cat: Int,
+    val is_dog: Int,
+    val is_fish: Int,
+    val is_law_enforcement: Int,
+    val is_miltary: Int,
+    val is_other: Int,
+    val is_outdoor_pet: Int,
+    val is_religious: Int,
+    val is_retiles: Int,
+    val is_rodents: Int,
+    val is_vegetarian: Int,
+    val key2: String,
+    val law_enforcement: Int,
+    val lawinfo_hidden: Int,
+    val miltary_experience: Int,
+    val other_religion: String,
+    val outdoor_pet_hidden: Int,
+    val pets: Int,
+    val petsinfo_hidden: Int,
+    val politics: Int,
+    val politicsInfo_hidden: Int,
+    val religion_hidden: Int,
+    val religion_name: Int,
+    val retiles_hidden: Int,
+    val rodents_hidden: Int,
+    val smoking: Int,
+    val smoking_range: Int,
+    val smokinginfo_hidden: Int,
+    val type_vegetarian: Int,
+    val updated_at: String,
+    val user_id: Int,
+    val want_more: Int,
+    val weed: Int,
+    val weed_range: Int,
+    val weedinfo_hidden: Int
+)
+
+data class MatchBubble(
+    val alcohol_animate: Int,
+    val children_animate: Int,
+    val education_animate: Int,
+    val fitness_animate: Int,
+    val height_animate: Int,
+    val income_animate: Int,
+    val military_animate: Int,
+    val pets_animate: Int,
+    val politics_animate: Int,
+    val religion_animate: Int,
+    val smoking_animate: Int,
+    val vegan_animate: Int,
+    val weed_animate: Int
+)
+
+data class DataXXXXXXX(
+    val created_at: String,
+    val female_dating: Int,
+    val female_hookup: Int,
+    val female_serious_relation: Int,
+    val id: Int,
+    val interested_in: String,
+    val interested_in_hidden: Int,
+    val is_updated: Int,
+    val male_dating: Int,
+    val male_hookup: Int,
+    val male_serious_relation: Int,
+    val men_tab: Int,
+    val non_conforming_dating: Int,
+    val non_conforming_hookup: Int,
+    val non_conforming_serious_relation: Int,
+    val updated_at: String,
+    val user_id: Int,
+    val women_tab: Int
+)
+
+data class DataXXXXXXXX(
+    val facebook_username: String,
+    val id: Int,
+    val instagram_username: String,
+    val show_facebook_profile: Int,
+    val show_instagram_profile: Int,
+    val show_snapchat_profile: Int,
+    val show_tiktok_profile: Int,
+    val show_twitter_profile: Int,
+    val snapchat_username: String,
+    val tiktok_username: String,
+    val twitter_username: String
+)

@@ -22,15 +22,17 @@ kotlin {
     jvmToolchain(17)
 
     listOf(
-//        iosX64(),
+        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
-            freeCompilerArgs += listOf("-Xbinary=bundleId=com.jetbrains.kmpapp","-Xobjc-generics")
+            freeCompilerArgs += listOf("-Xbinary=bundleId=com.jetbrains.kmpapp")//,"-Xobjc-generics"
+
         }
+
     }
     applyDefaultHierarchyTemplate()
 
@@ -41,12 +43,14 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(compose.foundation)
             implementation(compose.ui)
+            implementation(libs.androidx.constraintlayout.compose)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(compose.foundation)
             implementation(compose.ui)
 
+            implementation(libs.androidx.constraintlayout.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -64,6 +68,7 @@ kotlin {
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
 
+            implementation(libs.androidx.constraintlayout.compose)
         }
 
         val desktopMain by getting
@@ -79,6 +84,7 @@ kotlin {
             implementation(libs.kamel.core.desktop)
             implementation(libs.kamel.image.desktop)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.androidx.constraintlayout.compose)
         }
 
 
@@ -129,10 +135,6 @@ android {
     dependencies {
         debugImplementation(libs.androidx.compose.ui.tooling)
     }
-}
-dependencies {
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
 }
 
 compose.desktop {

@@ -7,5 +7,6 @@ class MuseumApp : Application() {
     override fun onCreate() {
         super.onCreate()
         initKoin()
+        AppContext.setUp(applicationContext)
     }
 }
